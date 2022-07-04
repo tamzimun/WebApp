@@ -24,20 +24,18 @@ class DetailViewController: UIViewController  {
     private var favWebsites: [Website] = []
     
     static func makeDetailViewController(title: String, urlString: String) -> DetailViewController {
-        let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         
+        let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         newViewController.title = title
         newViewController.urlString = urlString
         
         return newViewController
     }
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadWebSite()
-        singleTap()
         doubleTap()
 
         activityIndicator.startAnimating()
@@ -52,20 +50,6 @@ class DetailViewController: UIViewController  {
         guard let siteUrl = URL(string: urlString) else { return }
         let request = URLRequest(url: siteUrl)
         webView.load(request)
-    }
-    
-    func singleTap() {
-        
-        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap))
-        singleTapGestureRecognizer.delegate = self
-        singleTapGestureRecognizer.numberOfTapsRequired = 3
-        webView.addGestureRecognizer(singleTapGestureRecognizer)
-    }
-
-    @objc
-    func handleSingleTap(gestureReconizer: UITapGestureRecognizer) {
-        view.backgroundColor = .white
-        return
     }
     
     func doubleTap() {
