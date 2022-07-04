@@ -86,6 +86,7 @@ extension MasterViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let controller = DetailViewController.makeDetailViewController(title: websites[indexPath.row].title, urlString: websites[indexPath.row].siteUrl)
+        controller.addFavDelegate = self
         splitViewController?.showDetailViewController(controller, sender: self)
         
     }
@@ -103,3 +104,13 @@ extension MasterViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+extension MasterViewController: AddFavWebsiteDelegate {
+    func addFavWeb(favWebsite: Website) {
+        self.dismiss(animated: true) {
+            self.favWebsites.append(favWebsite)
+            self.tableView.reloadData()
+        }
+    }
+}
+

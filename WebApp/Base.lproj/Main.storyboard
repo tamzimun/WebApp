@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t5k-iE-BrZ">
-                                <rect key="frame" x="0.0" y="88" width="375" height="639"/>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t5k-iE-BrZ">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -25,16 +25,16 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="HKd-5X-bQw">
-                                <rect key="frame" x="169" y="394.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="169" y="414.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vYm-eN-mrQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HKd-5X-bQw" firstAttribute="centerX" secondItem="t5k-iE-BrZ" secondAttribute="centerX" id="4zf-HE-uyG"/>
+                            <constraint firstItem="t5k-iE-BrZ" firstAttribute="bottom" secondItem="vYm-eN-mrQ" secondAttribute="bottom" id="Z1e-VJ-Y39"/>
                             <constraint firstItem="vYm-eN-mrQ" firstAttribute="trailing" secondItem="t5k-iE-BrZ" secondAttribute="trailing" id="b8C-ho-ZKc"/>
                             <constraint firstItem="t5k-iE-BrZ" firstAttribute="top" secondItem="vYm-eN-mrQ" secondAttribute="top" id="dyl-Mj-1xo"/>
-                            <constraint firstItem="vYm-eN-mrQ" firstAttribute="bottom" secondItem="t5k-iE-BrZ" secondAttribute="bottom" constant="40" id="jZs-UJ-jib"/>
                             <constraint firstItem="t5k-iE-BrZ" firstAttribute="leading" secondItem="vYm-eN-mrQ" secondAttribute="leading" id="oXl-tj-WoK"/>
                             <constraint firstItem="HKd-5X-bQw" firstAttribute="centerY" secondItem="t5k-iE-BrZ" secondAttribute="centerY" id="z6Z-ur-4zI"/>
                         </constraints>
@@ -70,7 +70,7 @@
                                 <rect key="frame" x="0.0" y="124" width="375" height="688"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="BZA-K0-PWY">
-                                    <rect key="frame" x="0.0" y="131.33333206176758" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="131" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <items/>
                                 </toolbar>

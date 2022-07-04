@@ -8,13 +8,20 @@
 import UIKit
 import WebKit
 
+protocol AddFavWebsiteDelegate: AnyObject {
+    func addFavWeb(favWebsite: Website)
+}
+
 class DetailViewController: UIViewController  {
+
+    weak var addFavDelegate: AddFavWebsiteDelegate?
     
     @IBOutlet var webView: WKWebView!
-    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    var urlString: String = "https://www.apple.com"
+    private var timer: Timer!
+    private var urlString: String = "https://www.apple.com"
+    private var favWebsites: [Website] = []
     
     static func makeDetailViewController(title: String, urlString: String) -> DetailViewController {
         let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
@@ -24,19 +31,19 @@ class DetailViewController: UIViewController  {
         
         return newViewController
     }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadWebSite()
+        singleTap()
         doubleTap()
-        
+
         activityIndicator.startAnimating()
         webView.navigationDelegate = self
         activityIndicator.hidesWhenStopped = true
         webView.allowsLinkPreview = false
-        
-        view.backgroundColor = .orange
         self.navigationItem.setHidesBackButton(true, animated: false)
     }
     
@@ -47,8 +54,18 @@ class DetailViewController: UIViewController  {
         webView.load(request)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    func singleTap() {
+        
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap))
+        singleTapGestureRecognizer.delegate = self
+        singleTapGestureRecognizer.numberOfTapsRequired = 3
+        webView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+
+    @objc
+    func handleSingleTap(gestureReconizer: UITapGestureRecognizer) {
+        view.backgroundColor = .white
+        return
     }
     
     func doubleTap() {
@@ -56,22 +73,26 @@ class DetailViewController: UIViewController  {
         let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
         doubleTapGestureRecognizer.delegate = self
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
-        view.addGestureRecognizer(doubleTapGestureRecognizer)
-    
+        webView.addGestureRecognizer(doubleTapGestureRecognizer)
+        
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.setBackgroundColor), userInfo: nil, repeats: true)
     }
     
     @objc
     func handleDoubleTap(gestureReconizer: UITapGestureRecognizer) {
-        if gestureReconizer.state != UIGestureRecognizer.State.ended {
-        let touchLocation = gestureReconizer.location(in: webView)
-        print("HI \(touchLocation)")
-            
+        view.backgroundColor = .systemOrange
+        
+        guard let title = title else { return }
+        let favWebsite = Website(title: title, siteUrl: urlString)
+        addFavDelegate?.addFavWeb(favWebsite: favWebsite)
+
         return
-      }
-        if gestureReconizer.state != UIGestureRecognizer.State.began { return }
     }
     
-
+    @objc
+    func setBackgroundColor() {
+        self.view.backgroundColor = .white
+    }
 }
 
 extension DetailViewController: WKNavigationDelegate {
@@ -87,7 +108,7 @@ extension DetailViewController: WKNavigationDelegate {
 
 extension DetailViewController: UIGestureRecognizerDelegate {
 
-    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith:UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith: UIGestureRecognizer) -> Bool {
         return true
     }
     func gestureRecognizer(_: UIGestureRecognizer, shouldReceive:UITouch) -> Bool {
