@@ -41,7 +41,6 @@ class DetailViewController: UIViewController  {
         activityIndicator.startAnimating()
         webView.navigationDelegate = self
         activityIndicator.hidesWhenStopped = true
-        webView.allowsLinkPreview = false
         self.navigationItem.setHidesBackButton(true, animated: false)
     }
     
