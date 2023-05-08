@@ -2,7 +2,7 @@
 //  Website.swift
 //  WebApp
 //
-//  Created by Aida Moldaly on 02.07.2022.
+//  Created by tamzimun on 02.07.2022.
 //
 
 import Foundation

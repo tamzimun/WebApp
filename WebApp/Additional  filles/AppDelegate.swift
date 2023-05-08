@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  WebApp
 //
-//  Created by Aida Moldaly on 01.07.2022.
+//  Created by tamzimun on 01.07.2022.
 //
 
 import UIKit
